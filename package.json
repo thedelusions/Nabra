@@ -1,0 +1,36 @@
+{
+  "name": "oureon-music-bot",
+  "version": "1.0.0",
+  "description": "A minimal, modern Discord music bot with YouTube, SoundCloud, and Anghami metadata support.",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "BIOS",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/voice": "^0.18.0",
+    "cheerio": "^1.0.0",
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "play-dl": "^1.9.7",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "discord",
+    "music",
+    "bot",
+    "youtube",
+    "soundcloud",
+    "anghami",
+    "oureon"
+  ]
+}
