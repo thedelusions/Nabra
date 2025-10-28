@@ -392,12 +392,14 @@ export function isValidUrl(string) {
  */
 async function extractPlaylistWithYtDlp(playlistUrl) {
   return new Promise((resolve, reject) => {
-    // Use yt-dlp to extract playlist info in JSON format
+    // Use yt-dlp with anti-throttling options for playlist extraction
     const ytdlp = spawn('yt-dlp', [
       '--flat-playlist',
       '--dump-json',
       '--no-warnings',
       '--playlist-end', '200', // Limit to first 200 videos
+      '--extractor-args', 'youtube:player_client=android,web',
+      '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
       playlistUrl
     ]);
 

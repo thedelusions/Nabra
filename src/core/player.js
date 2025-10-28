@@ -346,14 +346,17 @@ class PlayerManager {
       }
       
       try {
-        // Spawn yt-dlp process directly with optimized settings
+        // Spawn yt-dlp process with anti-throttling options
         const ytdlpProcess = spawn('yt-dlp', [
-          '-f', 'bestaudio',
+          '-f', 'bestaudio/best',
           '-o', '-',
           '--no-warnings',
-          '--buffer-size', '16K',  // Small buffer for faster start
           '--no-playlist',
           '--no-check-certificate',
+          '--extractor-args', 'youtube:player_client=android,web',
+          '--no-part',
+          '--quiet',
+          '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
           videoUrl
         ], {
           stdio: ['ignore', 'pipe', 'pipe']
