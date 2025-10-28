@@ -1,11 +1,8 @@
 [phases.setup]
-nixPkgs = ["nodejs_20", "openjdk17", "python3", "gcc", "gnumake", "libopus"]
+nixPkgs = ["nodejs_20", "openjdk17"]
 
 [phases.install]
-cmds = ["npm install --production --no-optional"]
-
-[phases.build]
-cmds = ["echo 'No build step required'"]
+cmds = ["npm ci"]
 
 [start]
 cmd = "node src/index.js"
