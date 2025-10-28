@@ -107,11 +107,11 @@ function createQueueEmbed(queueTracks, currentTrack, guildName, page = 0) {
   if (currentTrack) {
     const trackInfo = getTrackInfo(currentTrack);
     const duration = trackInfo.isLive ? '🔴 Live' : formatDuration(trackInfo.duration);
-    embed.addFields({
+    embed.addFields([{
       name: '🎵 Now Playing',
       value: `**[${trackInfo.title}](${trackInfo.uri})**\n${EMOJIS.MICROPHONE} ${trackInfo.author} • ${duration}`,
       inline: false
-    });
+    }]);
   }
 
   // Queue tracks (paginated)
@@ -127,11 +127,11 @@ function createQueueEmbed(queueTracks, currentTrack, guildName, page = 0) {
       return `**${position}.** [${trackInfo.title}](${trackInfo.uri})\n${EMOJIS.MICROPHONE} ${trackInfo.author} • ${duration}`;
     }).join('\n\n');
 
-    embed.addFields({
+    embed.addFields([{
       name: `📜 Up Next (${queueTracks.length} track${queueTracks.length !== 1 ? 's' : ''})`,
       value: queueList || 'No tracks in queue',
       inline: false
-    });
+    }]);
 
     // Total duration
     const totalDuration = queueTracks.reduce((acc, track) => {
@@ -143,11 +143,11 @@ function createQueueEmbed(queueTracks, currentTrack, guildName, page = 0) {
       text: `Total queue time: ${formatDuration(totalDuration)} • Page ${page + 1}/${Math.ceil(queueTracks.length / ITEMS_PER_PAGE)}` 
     });
   } else {
-    embed.addFields({
+    embed.addFields([{
       name: '📜 Up Next',
       value: 'No tracks in queue',
       inline: false
-    });
+    }]);
   }
 
   return embed;
