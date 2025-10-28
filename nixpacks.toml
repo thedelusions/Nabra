@@ -2,7 +2,7 @@
 nixPkgs = ["nodejs_20", "openjdk17", "python3", "gcc", "gnumake", "libopus"]
 
 [phases.install]
-cmds = ["npm ci"]
+cmds = ["npm install --production --no-optional"]
 
 [phases.build]
 cmds = ["echo 'No build step required'"]
