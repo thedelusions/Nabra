@@ -359,6 +359,20 @@ class PlayerManager {
           stdio: ['ignore', 'pipe', 'pipe']
         });
 
+        // Handle spawn errors immediately
+        ytdlpProcess.on('error', (error) => {
+          if (error.code === 'ENOENT') {
+            logger.error('❌ yt-dlp not found. Please install yt-dlp or use Lavalink for YouTube playback.');
+          } else {
+            logger.error('❌ yt-dlp process error:', error);
+          }
+          // Skip to next track instead of crashing
+          this.playNextPlayDl(guildId).catch(err => 
+            logger.error('Failed to skip to next track:', err)
+          );
+          return;
+        });
+
         if (!ytdlpProcess.stdout) {
           throw new Error('No stdout from yt-dlp');
         }
@@ -388,11 +402,6 @@ class PlayerManager {
           stream.resume();
           logger.error('Stream error:', error);
         };
-
-        ytdlpProcess.on('error', (error) => {
-          console.error('❌ yt-dlp process error:', error);
-          onError(error);
-        });
         
         ytdlpProcess.on('exit', (code, signal) => {
           console.log(`yt-dlp process exited with code ${code}, signal ${signal}`);
