@@ -6,16 +6,21 @@
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/thedelusions/Nabra)
+
 ## ✨ Features
 
-- 🎵 **Multi-Source Support**: YouTube, Spotify, SoundCloud, Deezer, and Anghami (via YouTube mapping)
+- 🎵 **Multi-Source Support**: YouTube, Spotify, Apple Music, SoundCloud
 - 🚀 **Dual Playback Engine**: Lavalink for primary streaming, play-dl for fallback
-- 📜 **Advanced Queue Management**: Repeat modes, shuffle, history, previous track
-- ⏱️ **Seek Controls**: Forward/backward seeking in tracks (Lavalink only)
-- 🎨 **Rich Embeds**: Beautiful now-playing and queue displays
+- 🎮 **Interactive Controls**: Button-based music controls with /controls command
+- 📜 **Advanced Queue Management**: Repeat modes, shuffle, jump to track, pagination
+- 🔴 **Live Updates**: Auto-updating now playing display with /live command
+- 🏠 **24/7 Mode**: Keep bot in voice channel even when queue ends
+- ⏱️ **Seek Controls**: Forward/backward seeking in tracks
+- 🎨 **Rich Embeds**: Beautiful modern Discord Blurple theme
 - 📝 **Comprehensive Logging**: Winston-based logging with file rotation
 - 🔄 **Auto-Reconnect**: Automatic reconnection and error recovery
-- 🌐 **Production Ready**: Deployable on Render, Heroku, or VPS
+- 🌐 **Production Ready**: Deployable on Railway, Heroku, or VPS
 
 ## 📋 Prerequisites
 
@@ -23,7 +28,16 @@
 - **Lavalink Server** (standalone or Docker)
 - **Discord Bot Token** ([Create one here](https://discord.com/developers/applications))
 
-## 🚀 Quick Start
+## 🚂 Deploy to Railway (Recommended)
+
+**Quick deploy with one click!** See [RAILWAY_DEPLOY.md](./RAILWAY_DEPLOY.md) for detailed instructions.
+
+1. Click the "Deploy on Railway" button above
+2. Set up environment variables (bot token, etc.)
+3. Add Lavalink service (included in guide)
+4. Deploy and enjoy! 🎵
+
+## 🚀 Quick Start (Local Development)
 
 ### 1. Clone and Install
 
