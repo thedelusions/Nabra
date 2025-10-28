@@ -346,9 +346,9 @@ class PlayerManager {
       }
       
       try {
-        // Spawn yt-dlp process with anti-throttling options
+        // Spawn yt-dlp process with anti-throttling and streaming options
         const ytdlpProcess = spawn('yt-dlp', [
-          '-f', 'bestaudio/best',
+          '-f', 'bestaudio[ext=webm]/bestaudio[ext=m4a]/bestaudio',
           '-o', '-',
           '--no-warnings',
           '--no-playlist',
@@ -356,8 +356,6 @@ class PlayerManager {
           '--no-part',
           '--quiet',
           '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          '--extract-audio',
-          '--audio-format', 'best',
           '--no-check-certificate',
           videoUrl
         ], {
