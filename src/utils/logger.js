@@ -20,9 +20,14 @@ const customFormat = winston.format.combine(
   winston.format.printf(({ timestamp, level, message, stack, ...meta }) => {
     let log = `${timestamp} [${level.toUpperCase()}]: ${message}`;
     
-    // Add metadata if present
+    // Add metadata if present (avoid circular references)
     if (Object.keys(meta).length > 0) {
-      log += ` ${JSON.stringify(meta)}`;
+      try {
+        log += ` ${JSON.stringify(meta, null, 0)}`;
+      } catch (err) {
+        // Skip circular references
+        log += ` ${Object.keys(meta).join(', ')}`;
+      }
     }
     
     // Add stack trace for errors
