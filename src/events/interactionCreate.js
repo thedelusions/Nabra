@@ -333,10 +333,10 @@ export default {
 
           case 'music_refresh': {
             // Refresh the controls message
+            await interaction.deferUpdate();
+            
             const controlsCommand = interaction.client.commands.get('controls');
             if (controlsCommand) {
-              await interaction.deferUpdate();
-              await interaction.message.delete();
               await controlsCommand.execute(interaction);
             }
             break;

@@ -141,11 +141,11 @@ function createLiveEmbed(player, track) {
 
   if (player.queue && player.queue.tracks.length > 0) {
     const nextTrack = getTrackInfo(player.queue.tracks[0]);
-    embed.addFields({
+    embed.addFields([{
       name: `${EMOJIS.QUEUE} Up Next`,
       value: `**${nextTrack.title}**\n${player.queue.tracks.length - 1} more in queue`,
       inline: false
-    });
+    }]);
   }
 
   return embed;

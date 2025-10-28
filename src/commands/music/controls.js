@@ -122,17 +122,24 @@ export default {
         { name: '📊 Progress', value: `${progressBar}\n${currentTime} / ${totalTime}`, inline: false }
       );
 
-    if (player.queue && player.queue.tracks.length > 0) {
-      embed.addFields({
+    if (player.queue && player.queue.tracks && player.queue.tracks.length > 0) {
+      embed.addFields([{
         name: `${EMOJIS.QUEUE} Up Next`,
         value: `**${player.queue.tracks[0].info?.title || player.queue.tracks[0].title}**\n${player.queue.tracks.length - 1} more in queue`,
         inline: false
-      });
+      }]);
     }
 
-    await interaction.reply({
+    const payload = {
       embeds: [embed],
       components: [row1, row2]
-    });
+    };
+
+    // Check if this is a button interaction that was deferred
+    if (interaction.deferred) {
+      await interaction.editReply(payload);
+    } else {
+      await interaction.reply(payload);
+    }
   }
 };

@@ -54,11 +54,11 @@ export function createQueueEmbed(queue, currentTrack, guildName) {
   if (currentTrack) {
     const trackInfo = getTrackInfo(currentTrack);
     const duration = trackInfo.isLive ? '🔴 Live' : (trackInfo.duration ? formatDuration(trackInfo.duration) : '0:00');
-    embed.addFields({
+    embed.addFields([{
       name: `${EMOJIS.PLAY} Currently Playing`,
       value: `╰► **${trackInfo.title}**\n   └ ${EMOJIS.MICROPHONE} ${trackInfo.author} • ${EMOJIS.HEADPHONES} \`${duration}\``,
       inline: false
-    });
+    }]);
   }
 
   if (queue.length === 0) {
@@ -96,11 +96,11 @@ export function createErrorEmbed(message, details = null) {
     .setDescription(`${EMOJIS.ERROR} **${message}**`);
   
   if (details) {
-    embed.addFields({ 
+    embed.addFields([{ 
       name: '📝 Details', 
       value: `\`\`\`${details}\`\`\``,
       inline: false 
-    });
+    }]);
   }
   
   embed.setFooter({ text: 'Need help? Check /help for available commands' })
