@@ -15,7 +15,7 @@ export default {
       if (!interaction.member.voice.channel) {
         return interaction.reply({
           embeds: [createErrorEmbed('You need to be in a voice channel!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -24,7 +24,7 @@ export default {
       if (!player) {
         return interaction.reply({
           embeds: [createErrorEmbed('Nothing is currently playing!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -32,7 +32,7 @@ export default {
       if (!player.playing && !player.paused) {
         return interaction.reply({
           embeds: [createErrorEmbed('Nothing is currently playing!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -74,7 +74,7 @@ export default {
       logger.error('Skip command error:', error);
       return interaction.reply({
         embeds: [createErrorEmbed('Failed to skip the track', error.message)],
-        ephemeral: true
+        flags: [64]
       });
     }
   }

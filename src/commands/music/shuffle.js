@@ -14,7 +14,7 @@ export default {
       if (!interaction.member.voice.channel) {
         return interaction.reply({
           embeds: [createErrorEmbed('You need to be in a voice channel!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -23,7 +23,7 @@ export default {
       if (!player) {
         return interaction.reply({
           embeds: [createErrorEmbed('No active player in this server!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -34,7 +34,7 @@ export default {
         if (!playerData || playerData.queue.length === 0) {
           return interaction.reply({
             embeds: [createErrorEmbed('The queue is empty!')],
-            ephemeral: true
+            flags: [64]
           });
         }
         
@@ -49,7 +49,7 @@ export default {
         if (!player.queue?.tracks || player.queue.tracks.length === 0) {
           return interaction.reply({
             embeds: [createErrorEmbed('The queue is empty!')],
-            ephemeral: true
+            flags: [64]
           });
         }
         
@@ -65,7 +65,7 @@ export default {
       logger.error('Shuffle command error:', error);
       return interaction.reply({
         embeds: [createErrorEmbed('Failed to shuffle the queue', error.message)],
-        ephemeral: true
+        flags: [64]
       });
     }
   }

@@ -18,7 +18,7 @@ export default {
       if (!player) {
         return interaction.reply({
           content: '❌ No active player in this server!',
-          ephemeral: true
+          flags: [64] // MessageFlags.Ephemeral
         });
       }
 
@@ -28,7 +28,7 @@ export default {
       if (!currentTrack && queueTracks.length === 0) {
         return interaction.reply({
           content: '❌ Queue is empty!',
-          ephemeral: true
+          flags: [64] // MessageFlags.Ephemeral
         });
       }
 
@@ -72,7 +72,7 @@ export default {
 
       const response = {
         embeds: [embed],
-        ephemeral: true
+        flags: [64]
       };
 
       if (totalPages > 1) {
@@ -91,7 +91,7 @@ export default {
       logger.error('Queue command error:', error);
       return interaction.reply({
         content: `❌ Failed to display queue: ${error.message}`,
-        ephemeral: true
+        flags: [64]
       });
     }
   }

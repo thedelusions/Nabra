@@ -19,7 +19,7 @@ export default {
       if (!player) {
         return interaction.reply({
           content: '❌ Nothing is currently playing!',
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -28,7 +28,7 @@ export default {
       if (!currentTrack) {
         return interaction.reply({
           content: '❌ No track information available!',
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -106,7 +106,7 @@ export default {
       logger.error('Live command error:', error);
       return interaction.reply({
         content: `❌ Error: ${error.message}`,
-        ephemeral: true
+        flags: [64]
       });
     }
   }
@@ -167,7 +167,7 @@ export function handleLiveStop(interaction) {
   } else {
     interaction.reply({
       content: '❌ Live display already stopped',
-      ephemeral: true
+      flags: [64]
     });
   }
 }

@@ -34,7 +34,7 @@ export default {
           'You need **Manage Server** permission to use this command!',
           COLORS.ERROR
         )],
-        ephemeral: true
+        flags: [64]
       });
     }
 

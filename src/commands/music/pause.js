@@ -14,7 +14,7 @@ export default {
       if (!interaction.member.voice.channel) {
         return interaction.reply({
           embeds: [createErrorEmbed('You need to be in a voice channel!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -23,7 +23,7 @@ export default {
       if (!player) {
         return interaction.reply({
           embeds: [createErrorEmbed('Nothing is currently playing!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -32,14 +32,14 @@ export default {
       if (!currentTrack && !player.paused) {
         return interaction.reply({
           embeds: [createErrorEmbed('Nothing is currently playing!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
       if (player.paused) {
         return interaction.reply({
           embeds: [createErrorEmbed('The player is already paused!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -55,7 +55,7 @@ export default {
       logger.error('Pause command error:', error);
       return interaction.reply({
         embeds: [createErrorEmbed('Failed to pause the track', error.message)],
-        ephemeral: true
+        flags: [64]
       });
     }
   }

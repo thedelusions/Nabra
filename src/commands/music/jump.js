@@ -21,7 +21,7 @@ export default {
       if (!interaction.member.voice.channel) {
         return interaction.reply({
           embeds: [createEmbed('Voice Channel Required', 'You need to be in a voice channel!', COLORS.ERROR)],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -30,7 +30,7 @@ export default {
       if (!player) {
         return interaction.reply({
           embeds: [createEmbed('No Player', 'No active player in this server!', COLORS.ERROR)],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -39,7 +39,7 @@ export default {
       if (queue.length === 0) {
         return interaction.reply({
           embeds: [createEmbed('Empty Queue', 'Queue is empty!', COLORS.ERROR)],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -66,7 +66,7 @@ export default {
 
         return interaction.reply({
           embeds: [embed],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -78,7 +78,7 @@ export default {
             `Invalid position! Queue has only ${queue.length} track${queue.length !== 1 ? 's' : ''}.`,
             COLORS.ERROR
           )],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -124,7 +124,7 @@ export default {
       logger.error('Jump command error:', error);
       return interaction.reply({
         embeds: [createEmbed('Error', `Failed to jump to track: ${error.message}`, COLORS.ERROR)],
-        ephemeral: true
+        flags: [64]
       });
     }
   }

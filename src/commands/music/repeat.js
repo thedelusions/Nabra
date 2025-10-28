@@ -26,7 +26,7 @@ export default {
       if (!interaction.member.voice.channel) {
         return interaction.reply({
           embeds: [createErrorEmbed('You need to be in a voice channel!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -38,7 +38,7 @@ export default {
         if (!queueExists || queueExists.length === 0) {
           return interaction.reply({
             embeds: [createErrorEmbed('No active player or queue in this server!')],
-            ephemeral: true
+            flags: [64]
           });
         }
         // If queue exists but no player, still allow setting repeat mode
@@ -88,7 +88,7 @@ export default {
       logger.error('Repeat command error:', error);
       return interaction.reply({
         embeds: [createErrorEmbed('Failed to set repeat mode', error.message)],
-        ephemeral: true
+        flags: [64]
       });
     }
   }

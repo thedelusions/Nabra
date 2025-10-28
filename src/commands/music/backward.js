@@ -22,7 +22,7 @@ export default {
       if (!interaction.member.voice.channel) {
         return interaction.reply({
           embeds: [createErrorEmbed('You need to be in a voice channel!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -31,7 +31,7 @@ export default {
       if (!player) {
         return interaction.reply({
           embeds: [createErrorEmbed('Nothing is currently playing!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -41,7 +41,7 @@ export default {
       if (player.isPlayDl) {
         return interaction.reply({
           embeds: [createErrorEmbed('Seeking is not supported with the current playback engine. Only available when using Lavalink.')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -49,7 +49,7 @@ export default {
       if (!player.seek || typeof player.position === 'undefined') {
         return interaction.reply({
           embeds: [createErrorEmbed('Seeking is not supported with the current playback engine.')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -75,7 +75,7 @@ export default {
       logger.error('Backward command error:', error);
       return interaction.reply({
         embeds: [createErrorEmbed('Failed to skip backward', error.message)],
-        ephemeral: true
+        flags: [64]
       });
     }
   }

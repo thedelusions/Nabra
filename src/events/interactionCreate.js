@@ -37,9 +37,9 @@ export default {
 
         try {
           if (interaction.replied || interaction.deferred) {
-            await interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
+            await interaction.followUp({ embeds: [errorEmbed], flags: [64] });
           } else {
-            await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+            await interaction.reply({ embeds: [errorEmbed], flags: [64] });
           }
         } catch (replyError) {
           logger.error('Failed to send error message:', replyError.message);
@@ -63,7 +63,7 @@ export default {
         if (userId !== interaction.user.id) {
           return interaction.reply({
             content: '❌ This queue is not yours! Use `/queue` to view your own.',
-            ephemeral: true
+            flags: [64]
           });
         }
 
@@ -122,7 +122,7 @@ export default {
             'There is no music currently playing!',
             COLORS.ERROR
           )],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -135,7 +135,7 @@ export default {
             'No track information available!',
             COLORS.ERROR
           )],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -150,7 +150,7 @@ export default {
                   `Playback resumed!`,
                   COLORS.SUCCESS
                 )],
-                ephemeral: true
+                flags: [64]
               });
             } else {
               player.pause();
@@ -160,7 +160,7 @@ export default {
                   `Playback paused!`,
                   COLORS.SUCCESS
                 )],
-                ephemeral: true
+                flags: [64]
               });
             }
             break;
@@ -174,7 +174,7 @@ export default {
                   'No more tracks in the queue. Disconnected!',
                   COLORS.INFO
                 )],
-                ephemeral: true
+                flags: [64]
               });
             } else {
               const trackInfo = getTrackInfo(currentTrack);
@@ -185,7 +185,7 @@ export default {
                   `Skipped **${trackInfo.title}**`,
                   COLORS.SUCCESS
                 )],
-                ephemeral: true
+                flags: [64]
               });
             }
             break;
@@ -198,7 +198,7 @@ export default {
                   'There are no previous tracks to go back to!',
                   COLORS.ERROR
                 )],
-                ephemeral: true
+                flags: [64]
               });
             }
             // Go back to previous track
@@ -226,7 +226,7 @@ export default {
                 `Now playing **${prevInfo.title}**`,
                 COLORS.SUCCESS
               )],
-              ephemeral: true
+              flags: [64]
             });
             break;
           }
@@ -239,7 +239,7 @@ export default {
                 'Playback stopped and disconnected from voice channel!',
                 COLORS.SUCCESS
               )],
-              ephemeral: true
+              flags: [64]
             });
             break;
 
@@ -251,7 +251,7 @@ export default {
                   'Need at least 2 tracks in queue to shuffle!',
                   COLORS.ERROR
                 )],
-                ephemeral: true
+                flags: [64]
               });
             }
             
@@ -267,7 +267,7 @@ export default {
                 `Shuffled **${player.queue.tracks.length}** tracks in the queue!`,
                 COLORS.SUCCESS
               )],
-              ephemeral: true
+              flags: [64]
             });
             break;
 
@@ -290,7 +290,7 @@ export default {
                 `Repeat mode set to **${newMode.text}**`,
                 COLORS.SUCCESS
               )],
-              ephemeral: true
+              flags: [64]
             });
             break;
           }
@@ -304,7 +304,7 @@ export default {
                 `Volume set to **${newVolDown}%**`,
                 COLORS.SUCCESS
               )],
-              ephemeral: true
+              flags: [64]
             });
             break;
           }
@@ -318,7 +318,7 @@ export default {
                 `Volume set to **${newVolUp}%**`,
                 COLORS.SUCCESS
               )],
-              ephemeral: true
+              flags: [64]
             });
             break;
           }
@@ -349,7 +349,7 @@ export default {
                 'This button is not recognized!',
                 COLORS.ERROR
               )],
-              ephemeral: true
+              flags: [64]
             });
         }
       } catch (error) {
@@ -360,7 +360,7 @@ export default {
             'There was an error processing your button click!',
             COLORS.ERROR
           )],
-          ephemeral: true
+          flags: [64]
         };
         
         if (interaction.replied || interaction.deferred) {

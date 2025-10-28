@@ -18,7 +18,7 @@ export default {
           'There is no music currently playing!',
           COLORS.ERROR
         )],
-        ephemeral: true
+        flags: [64]
       });
     }
 
@@ -31,7 +31,7 @@ export default {
           'No track information available!',
           COLORS.ERROR
         )],
-        ephemeral: true
+        flags: [64]
       });
     }
 

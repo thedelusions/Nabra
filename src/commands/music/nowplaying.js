@@ -16,7 +16,7 @@ export default {
       if (!player) {
         return interaction.reply({
           embeds: [createErrorEmbed('Nothing is currently playing!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -25,7 +25,7 @@ export default {
       if (!currentTrack) {
         return interaction.reply({
           embeds: [createErrorEmbed('No track information available!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
@@ -102,13 +102,13 @@ export default {
 
       logger.info(`Showed track info in guild ${interaction.guild.id}`);
 
-      return interaction.reply({ embeds: [embed], ephemeral: true });
+      return interaction.reply({ embeds: [embed], flags: [64] });
 
     } catch (error) {
       logger.error('Now playing command error:', error);
       return interaction.reply({
         embeds: [createErrorEmbed('Failed to get track information', error.message)],
-        ephemeral: true
+        flags: [64]
       });
     }
   }

@@ -26,7 +26,7 @@ export default {
       if (!interaction.member.voice.channel) {
         return interaction.reply({
           embeds: [createErrorEmbed('You need to be in a voice channel to play music!')],
-          ephemeral: true
+          flags: [64]
         });
       }
 
