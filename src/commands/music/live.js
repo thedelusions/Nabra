@@ -54,11 +54,12 @@ export default {
         );
 
       // Send initial message
-      const message = await interaction.reply({
+      await interaction.reply({
         embeds: [createLiveEmbed(player, currentTrack)],
-        components: [row],
-        fetchReply: true
+        components: [row]
       });
+      
+      const message = await interaction.fetchReply();
 
       // Update every 5 seconds
       const interval = setInterval(async () => {

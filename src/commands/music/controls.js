@@ -61,7 +61,7 @@ export default {
           .setCustomId('music_previous')
           .setEmoji(EMOJIS.PREVIOUS)
           .setStyle(ButtonStyle.Secondary)
-          .setDisabled(!player.queue || player.queue.previous.length === 0),
+          .setDisabled(!player.queue || !player.queue.previous || player.queue.previous.length === 0),
         new ButtonBuilder()
           .setCustomId('music_playpause')
           .setEmoji(player.paused ? EMOJIS.PLAY : EMOJIS.PAUSE)
@@ -70,7 +70,7 @@ export default {
           .setCustomId('music_skip')
           .setEmoji(EMOJIS.SKIP)
           .setStyle(ButtonStyle.Secondary)
-          .setDisabled(!player.queue || player.queue.tracks.length === 0),
+          .setDisabled(!player.queue || !player.queue.tracks || player.queue.tracks.length === 0),
         new ButtonBuilder()
           .setCustomId('music_stop')
           .setEmoji(EMOJIS.STOP)
@@ -79,7 +79,7 @@ export default {
           .setCustomId('music_shuffle')
           .setEmoji(EMOJIS.SHUFFLE)
           .setStyle(ButtonStyle.Secondary)
-          .setDisabled(!player.queue || player.queue.tracks.length < 2)
+          .setDisabled(!player.queue || !player.queue.tracks || player.queue.tracks.length < 2)
       );
 
     const row2 = new ActionRowBuilder()
