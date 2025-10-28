@@ -1,0 +1,26 @@
+{
+  "embedColor": "#FF6B6B",
+  "maxQueueSize": 100,
+  "maxSongDuration": 7200,
+  "defaultVolume": 100,
+  "disconnectTimeout": 300000,
+  "searchResultLimit": 10,
+  "repeatModes": {
+    "OFF": 0,
+    "TRACK": 1,
+    "QUEUE": 2
+  },
+  "emojis": {
+    "play": "▶️",
+    "pause": "⏸️",
+    "stop": "⏹️",
+    "skip": "⏭️",
+    "previous": "⏮️",
+    "shuffle": "🔀",
+    "repeat": "🔁",
+    "queue": "📜",
+    "music": "🎵",
+    "error": "❌",
+    "success": "✅"
+  }
+}
