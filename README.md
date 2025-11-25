@@ -330,7 +330,6 @@ Contributions are welcome! Please:
 - [discord.js](https://discord.js.org/) - Discord API library
 - [Lavalink](https://github.com/lavalink-devs/Lavalink) - Audio streaming node
 - [play-dl](https://github.com/play-dl/play-dl) - Audio extraction library
-- [Winston](https://github.com/winstonjs/winston) - Logging library
 
 ---
 
