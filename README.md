@@ -323,7 +323,7 @@ Contributions are welcome! Please:
 ## 💬 Support
 
 - **Issues**: [GitHub Issues](https://github.com/your-repo/issues)
-- **Discord**: [Support Server](#) (optional)
+- **Discord**: [Support Server](#) 
 
 ## 🙏 Acknowledgments
 
