@@ -1,0 +1,40 @@
+services:
+  mongo:
+    image: mongo:4.4
+    container_name: nabra-mongo
+    restart: unless-stopped
+    volumes:
+      - ./data/mongo:/data/db
+
+  lavalink:
+    image: ghcr.io/lavalink-devs/lavalink:4
+    container_name: nabra-lavalink
+    restart: unless-stopped
+    environment:
+      # Old laptop = limited RAM. Lower this if it OOMs, raise it if you have headroom.
+      _JAVA_OPTIONS: "-Xmx1G"
+    volumes:
+      - ./lavalink/application.yml:/opt/Lavalink/application.yml:ro
+      - ./data/lavalink/plugins:/opt/Lavalink/plugins
+    expose:
+      - "2333"
+
+  bot:
+    build: .
+    container_name: nabra-bot
+    restart: unless-stopped
+    depends_on:
+      - mongo
+      - lavalink
+    env_file:
+      - .env
+    ports:
+      - "8888:8888"   # health-check endpoint (GET /health)
+
+  # Optional: uncomment if you want Redis caching instead of the in-memory fallback
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: nabra-redis
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./data/redis:/data
