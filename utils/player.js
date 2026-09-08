@@ -393,6 +393,40 @@ class PlayerHandler {
         }
     }
 
+    async playSoundCloudFallback(player, track) {
+        if (!player || !track?.info || track.info.sourceName !== 'youtube') return null;
+
+        const title = track.info.title?.trim();
+        if (!title || track.info.nabraSoundCloudFallbackTried) return null;
+
+        track.info.nabraSoundCloudFallbackTried = true;
+        const author = track.info.author?.trim();
+        const fallbackQuery = `scsearch:${title}${author ? ` ${author}` : ''}`;
+
+        try {
+            console.log(`🔄 YouTube playback failed, trying SoundCloud: ${fallbackQuery}`);
+            const resolve = await this.client.riffy.resolve({
+                query: fallbackQuery,
+                requester: track.info.requester
+            });
+            const fallbackTrack = resolve?.tracks?.find(candidate =>
+                candidate?.info?.sourceName === 'soundcloud'
+            );
+
+            if (!fallbackTrack?.info) return null;
+
+            fallbackTrack.info.requester = track.info.requester;
+            player.queue.add(fallbackTrack);
+            player.playing = false;
+            player.paused = false;
+            await player.play();
+            return fallbackTrack;
+        } catch (error) {
+            console.error('SoundCloud fallback failed:', error.message);
+            return null;
+        }
+    }
+
     /**
      * Fallback method for YouTube URLs that fail to load directly
      * Extracts video ID, fetches the title via oEmbed, then searches by title
@@ -734,6 +768,7 @@ class PlayerHandler {
                 const trackTitle = track?.info?.title || 'Unknown Track';
                 const source = track?.info?.sourceName || 'Unknown';
                 const errorMsg = error.exception?.message || error.message || 'Unknown error';
+                const fallbackTrack = await this.playSoundCloudFallback(player, track);
                 
                 console.error(`❌ Track error [${source}]: ${trackTitle}`);
                 console.error(`   Error: ${errorMsg}`);
@@ -744,9 +779,11 @@ class PlayerHandler {
                         const { EmbedBuilder } = require('discord.js');
                         const channel = await this.client.channels.fetch(player.textChannel);
                         const embed = new EmbedBuilder()
-                            .setDescription(`⚠️ Failed to play: **${trackTitle}**\n` +
+                            .setDescription(`${fallbackTrack
+                                          ? `⚠️ YouTube playback failed for **${trackTitle}**. Playing a SoundCloud alternative.`
+                                          : `⚠️ Failed to play: **${trackTitle}**`}\n` +
                                           `Source: ${source}\n` +
-                                          `${player.queue.size > 0 ? '⏭️ Playing next track...' : ''}`)
+                                          `${fallbackTrack || player.queue.size > 0 ? '⏭️ Continuing playback...' : ''}`)
                             .setColor('#FFA500');
                         await channel.send({ embeds: [embed] })
                             .then(m => setTimeout(() => m.delete().catch(() => {}), 5000));
