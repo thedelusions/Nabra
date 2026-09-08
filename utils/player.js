@@ -278,6 +278,14 @@ class PlayerHandler {
             });
 
             const { loadType, tracks, playlistInfo } = resolve;
+
+            if (!loadType && (!tracks || tracks.length === 0)) {
+                console.error('❌ Lavalink returned no load type or tracks; node may be unavailable');
+                return {
+                    type: 'error',
+                    message: 'Lavalink is currently unavailable. Please try again in a moment.'
+                };
+            }
             
             // Extra safety: if tracks exist but loadType is weird, try to play anyway
             if ((!loadType || loadType === undefined) && tracks && tracks.length > 0) {

@@ -66,6 +66,12 @@ module.exports = {
 
             const result = await playerHandler.playSong(player, query, message.author);
 
+            if (result.type === 'error') {
+                const embed = MusicFormatters.createErrorEmbed(`❌ ${result.message}`);
+                return message.reply({ embeds: [embed] })
+                    .then(m => setTimeout(() => m.delete().catch(() => {}), 5000));
+            }
+
             if (result.type === 'track') {
                 const isPlaying = !player.playing && player.queue.size === 0;
                 const embed = MusicFormatters.createTrackAddedEmbed(result.track, player, isPlaying);

@@ -113,6 +113,12 @@ module.exports = {
             const result = await playerHandler.playSong(player, query, interaction.user);
             const buttons = createMusicButtons();
 
+            if (result.type === 'error') {
+                const embed = MusicFormatters.createErrorEmbed(`❌ ${result.message}`);
+                return interaction.editReply({ embeds: [embed] })
+                    .then(() => setTimeout(() => interaction.deleteReply().catch(() => {}), 5000));
+            }
+
             if (result.type === 'track') {
                 const isPlaying = !player.playing && player.queue.size === 0;
                 const embed = MusicFormatters.createTrackAddedEmbed(result.track, player, isPlaying);
