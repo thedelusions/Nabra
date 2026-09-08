@@ -32,6 +32,13 @@ module.exports = {
                 });
             }
 
+            if (!interaction.inGuild()) {
+                return interaction.reply({
+                    content: 'This command can only be used in a server.',
+                    ephemeral: true
+                }).catch(() => {});
+            }
+
             if (!shiva || !shiva.validateCore || !shiva.validateCore()) {
                 const embed = new EmbedBuilder()
                     .setDescription('❌ System core offline - Commands unavailable')
