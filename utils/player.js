@@ -11,6 +11,31 @@ class PlayerHandler {
         this.nowPlayingMessages = new Map(); // Track now playing messages to delete old ones
     }
 
+    protectPlayerPlay(player) {
+        if (!player || player.__nabraSafePlay) return player;
+
+        const play = player.play.bind(player);
+        player.play = async (...args) => {
+            if (!player.queue?.length) {
+                player.playing = false;
+                return player;
+            }
+
+            try {
+                return await play(...args);
+            } catch (error) {
+                if (error.message?.includes('Queue is empty')) {
+                    player.playing = false;
+                    return player;
+                }
+                throw error;
+            }
+        };
+
+        Object.defineProperty(player, '__nabraSafePlay', { value: true });
+        return player;
+    }
+
     /**
      * Send Now Playing announcement to the voice channel's linked text chat
      */
@@ -167,6 +192,7 @@ class PlayerHandler {
                 let player = this.client.riffy.players.get(guildId);
 
                 if (player) {
+                    this.protectPlayerPlay(player);
                     if (player.voiceChannel === voiceChannelId) {
                         return player;
                     } else {
@@ -183,6 +209,7 @@ class PlayerHandler {
                     ...options
                 });
 
+                this.protectPlayerPlay(player);
                 return player;
             } catch (error) {
                 const isNoNodes = error.message?.includes('No nodes') || error.message?.includes('no available');
