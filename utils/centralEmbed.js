@@ -125,7 +125,7 @@ class CentralEmbedHandler {
                         inline: false
                     }
                 )
-                .setImage('https://cdn.discordapp.com/avatars/1432039902274519223/a_57e05f44a7ce328a3882a924f73aba44.gif')
+                .setImage('https://images.weserv.nl/?url=i.ibb.co%2FDDSdKy31%2Fezgif-8aec7517f2146d.gif')
                 .setFooter({ 
                     text: 'Nabra Music Bot • Developed By 𝖇𝖎𝖔𝖘!',
                     iconURL: this.client.user.displayAvatarURL()
@@ -351,7 +351,7 @@ class CentralEmbedHandler {
                         inline: false
                     }
                 )
-                .setImage('https://cdn.discordapp.com/avatars/1432039902274519223/a_57e05f44a7ce328a3882a924f73aba44.gif')
+                .setImage('https://images.weserv.nl/?url=i.ibb.co%2FDDSdKy31%2Fezgif-8aec7517f2146d.gif')
                 .setFooter({ 
                     text: 'Nabra Music Bot • Developed By 𝖇𝖎𝖔𝖘',
                     iconURL: this.client.user.displayAvatarURL()
