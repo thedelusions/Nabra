@@ -8,7 +8,7 @@
 ## Step 1: Prepare Your Repository
 
 ```bash
-cd /home/bios/code/bios/bots/UltimateMusic-Bot
+cd /home/bios/code/nabra
 
 # Initialize git if not already done
 git init
@@ -50,12 +50,17 @@ heroku config:set TOKEN="YOUR_DISCORD_BOT_TOKEN"
 heroku config:set MONGODB_URI="YOUR_MONGODB_CONNECTION_STRING"
 heroku config:set CLIENT_ID="YOUR_BOT_CLIENT_ID"
 heroku config:set GUILD_ID="YOUR_GUILD_ID"
-heroku config:set PREFIX="n!"
-heroku config:set STATUS_TEXT="Nabra Music Bot"
-heroku config:set EMBED_COLOR="#2F3767"
-heroku config:set SUPPORT_SERVER_INVITE="https://discord.gg/qKKBqNSD65"
-heroku config:set BOT_WEBSITE="https://oureonbh.com"
+heroku config:set BOT_PREFIX="n!"
+heroku config:set LAVALINK_HOST="YOUR_LAVALINK_HOST"
+heroku config:set LAVALINK_PORT="2333"
+heroku config:set LAVALINK_PASSWORD="YOUR_LAVALINK_PASSWORD"
+heroku config:set LAVALINK_SECURE="false"
 ```
+
+`MONGODB_URI` must point to a hosted MongoDB instance such as MongoDB Atlas. Heroku
+does not run the `mongo` or `lavalink` services from `docker-compose.yml`, so Lavalink
+must be hosted separately and exposed to the Heroku worker. Redis is optional; the bot
+falls back to in-memory caching when `REDIS_URL` is not configured.
 
 ## Step 6: Deploy to Heroku
 
