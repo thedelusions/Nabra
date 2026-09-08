@@ -432,19 +432,29 @@ class PlayerHandler {
 
         track.info.nabraSoundCloudFallbackTried = true;
         const author = track.info.author?.trim();
-        const fallbackQuery = `scsearch:${title}${author ? ` ${author}` : ''}`;
+        const fallbackQueries = [
+            `scsearch:${title}${author ? ` ${author}` : ''}`,
+            `scsearch:${title}`
+        ];
 
         try {
-            console.log(`🔄 YouTube playback failed, trying SoundCloud: ${fallbackQuery}`);
-            const resolve = await this.client.riffy.resolve({
-                query: fallbackQuery,
-                requester: track.info.requester
-            });
-            const fallbackTrack = resolve?.tracks?.find(candidate =>
-                candidate?.info?.sourceName === 'soundcloud'
-            );
+            let fallbackTrack = null;
+            for (const fallbackQuery of fallbackQueries) {
+                console.log(`🔄 YouTube playback failed, trying SoundCloud: ${fallbackQuery}`);
+                const resolve = await this.client.riffy.resolve({
+                    query: fallbackQuery,
+                    requester: track.info.requester
+                });
+                fallbackTrack = resolve?.tracks?.find(candidate =>
+                    candidate?.info?.sourceName === 'soundcloud'
+                );
+                if (fallbackTrack) break;
+            }
 
-            if (!fallbackTrack?.info) return null;
+            if (!fallbackTrack?.info) {
+                console.warn(`⚠️ No SoundCloud alternative found for: ${title}`);
+                return null;
+            }
 
             fallbackTrack.info.requester = track.info.requester;
             player.queue.add(fallbackTrack);
