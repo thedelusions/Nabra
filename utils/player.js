@@ -12,27 +12,50 @@ class PlayerHandler {
     }
 
     protectPlayerPlay(player) {
-        if (!player || player.__nabraSafePlay) return player;
+        if (!player) return player;
 
-        const play = player.play.bind(player);
-        player.play = async (...args) => {
-            if (!player.queue?.length) {
-                player.playing = false;
-                return player;
-            }
-
-            try {
-                return await play(...args);
-            } catch (error) {
-                if (error.message?.includes('Queue is empty')) {
+        if (!player.__nabraSafePlay) {
+            const play = player.play.bind(player);
+            player.play = async (...args) => {
+                if (!player.queue?.length) {
                     player.playing = false;
                     return player;
                 }
-                throw error;
-            }
-        };
 
-        Object.defineProperty(player, '__nabraSafePlay', { value: true });
+                try {
+                    return await play(...args);
+                } catch (error) {
+                    if (error.message?.includes('Queue is empty')) {
+                        player.playing = false;
+                        return player;
+                    }
+                    throw error;
+                }
+            };
+
+            Object.defineProperty(player, '__nabraSafePlay', { value: true });
+        }
+
+        if (typeof player.restart !== 'function') {
+            player.restart = async () => {
+                try {
+                    if (player.current) {
+                        player.queue.unshift(player.current);
+                        player.current = null;
+                    }
+
+                    player.playing = false;
+                    player.paused = false;
+
+                    if (player.queue?.length) await player.play();
+                } catch (error) {
+                    console.error(`Player restart failed for ${player.guildId}:`, error.message);
+                }
+
+                return player;
+            };
+        }
+
         return player;
     }
 
