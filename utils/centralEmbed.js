@@ -125,7 +125,7 @@ class CentralEmbedHandler {
                         inline: false
                     }
                 )
-                .setImage('https://i.ibb.co/DDSdKy31/ezgif-8aec7517f2146d.gif')
+                .setImage('https://i.ibb.co/DDSdKy31/ezgif-8aec7517f2146d.gif?v=2')
                 .setFooter({ 
                     text: 'Nabra Music Bot • Developed By 𝖇𝖎𝖔𝖘!',
                     iconURL: this.client.user.displayAvatarURL()
@@ -351,7 +351,7 @@ class CentralEmbedHandler {
                         inline: false
                     }
                 )
-                .setImage('https://i.ibb.co/DDSdKy31/ezgif-8aec7517f2146d.gif')
+                .setImage('https://i.ibb.co/DDSdKy31/ezgif-8aec7517f2146d.gif?v=2')
                 .setFooter({ 
                     text: 'Nabra Music Bot • Developed By 𝖇𝖎𝖔𝖘',
                     iconURL: this.client.user.displayAvatarURL()
