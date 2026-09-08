@@ -432,9 +432,11 @@ class PlayerHandler {
 
         track.info.nabraSoundCloudFallbackTried = true;
         const author = track.info.author?.trim();
+        const baseTitle = title.split(/\s+[-–—]+\s+/)[0].trim();
         const fallbackQueries = [
             `scsearch:${title}${author ? ` ${author}` : ''}`,
-            `scsearch:${title}`
+            `scsearch:${title}`,
+            `scsearch:${baseTitle}`
         ];
 
         try {
