@@ -65,7 +65,8 @@ class EnterpriseConfigurationManager {
             updateStatus: true,       // 👈 Update bot status with current song  
             autoDeaf: true,           // 👈 Auto-deafen bot in voice channels
             autoMute: false,          // 👈 Auto-mute bot in voice channels
-            resetOnEnd: true          // 👈 Reset player when queue ends
+            resetOnEnd: true,          // 👈 Reset player when queue ends
+            voiceChannelStatus: EnvironmentVariableProcessor.VOICE_CHANNEL_STATUS_ENABLED === 'true'
         };
     }
 }

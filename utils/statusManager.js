@@ -1,4 +1,5 @@
 const { ActivityType } = require('discord.js');
+const config = require('../config');
 
 class StatusManager {
     constructor(client) {
@@ -62,6 +63,8 @@ class StatusManager {
 
 
     async setVoiceChannelStatus(guildId, trackTitle) {
+        if (!config.features.voiceChannelStatus) return;
+
         try {
             const player = this.client.riffy.players.get(guildId);
             if (!player || !player.voiceChannel) return;
